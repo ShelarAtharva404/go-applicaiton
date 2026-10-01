@@ -1,0 +1,94 @@
+[0;1;39mGlobal[0m
+[0;94m         Protocols:[0m -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+[0;94m  resolv.conf mode:[0m stub
+
+[0;1;39mLink 2 (enp109s0)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 3 (wlp0s20f3)[0m
+[0;94m    Current Scopes:[0m DNS
+[0;94m         Protocols:[0m +DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+[0;94mCurrent DNS Server:[0m 8.8.8.8
+[0;94m       DNS Servers:[0m 8.8.8.8 1.1.1.1
+[0;94m        DNS Domain:[0m lan
+
+[0;1;39mLink 4 (br-37528b41ff47)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 6 (br-588e3012217d)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 7 (br-6a21e0e5ce66)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 8 (br-ad8ac310fe2b)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 9 (br-f00f33b95a7d)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 10 (br-05566944a8d8)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 11 (br-a09b306211fa)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 12 (br-ba1b90853729)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 13 (docker0)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 14 (veth123aaad)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 18 (vethcfa1b5d)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 21 (vethd1cdb6d)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 23 (veth99bc038)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 24 (vethc7a7dff)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 25 (veth2ce56dd)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 689 (br-ba1b95851fa4)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 692 (veth9f9fd7c)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 1412 (veth8410062)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 1413 (veth1baae58)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported
+
+[0;1;39mLink 1414 (veth47a1d79)[0m
+[0;94m    Current Scopes:[0m none
+[0;94m         Protocols:[0m -DefaultRoute -LLMNR -mDNS -DNSOverTLS DNSSEC=no/unsupported

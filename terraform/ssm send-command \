@@ -1,0 +1,108 @@
+==== SCRIPT WITH LINE NUMBERS ====
+     1	    #!/bin/bash
+     2	
+     3	    set -e
+     4	
+     5	    # Update packages
+     6	    dnf update -y
+     7	
+     8	    # Install Docker
+     9	    dnf install -y docker
+    10	
+    11	    systemctl enable docker
+    12	    systemctl start docker
+    13	
+    14	    # Install CloudWatch Agent
+    15	curl -fsSL \
+    16	  https://amazoncloudwatch-agent.s3.amazonaws.com/amazon_linux/amd64/latest/amazon-cloudwatch-agent.rpm \
+    17	  -o /tmp/amazon-cloudwatch-agent.rpm
+    18	
+    19	rpm -U /tmp/amazon-cloudwatch-agent.rpm
+    20	
+    21	# Configure CloudWatch Agent
+    22	cat > /opt/aws/amazon-cloudwatch-agent/etc/amazon-cloudwatch-agent.json <<'CWEOF'
+    23	{
+    24	  "metrics": {
+    25	    "namespace": "FleetPulse",
+    26	    "metrics_collected": {
+    27	      "cpu": {
+    28	        "measurement": [
+    29	          "cpu_usage_idle",
+    30	          "cpu_usage_user",
+    31	          "cpu_usage_system"
+    32	        ],
+    33	        "metrics_collection_interval": 60
+    34	      },
+    35	      "mem": {
+    36	        "measurement": [
+    37	          "mem_used_percent"
+    38	        ],
+    39	        "metrics_collection_interval": 60
+    40	      },
+    41	      "disk": {
+    42	        "measurement": [
+    43	          "used_percent"
+    44	        ],
+    45	        "resources": [
+    46	          "*"
+    47	        ],
+    48	        "metrics_collection_interval": 60
+    49	      }
+    50	    }
+    51	  }
+    52	}
+    53	
+    54	CWEOF
+    55	
+    56	# Start CloudWatch Agent
+    57	systemctl enable amazon-cloudwatch-agent
+    58	systemctl start amazon-cloudwatch-agent
+    59	
+    60	# Login to ECR
+    61	    aws ecr get-login-password --region ap-south-1 | \
+    62	      docker login --username AWS --password-stdin \
+    63	      670518341147.dkr.ecr.ap-south-1.amazonaws.com
+    64	
+    65	    # Pull images
+    66	    docker pull 670518341147.dkr.ecr.ap-south-1.amazonaws.com/fleetpulse-backend:1.1
+    67	    docker pull 670518341147.dkr.ecr.ap-south-1.amazonaws.com/fleetpulse-frontend:1.0
+    68	
+    69	    # Backend
+    70	    docker run -d \
+    71	      --name fleetpulse-backend \
+    72	      --restart unless-stopped \
+    73	      -p 8080:8080 \
+    74	      -e DB_HOST="fleetpulse-postgres.czygysaks7l0.ap-south-1.rds.amazonaws.com" \
+    75	      -e DB_PORT="5432" \
+    76	      -e DB_USER="fleetpulse_user" \
+    77	      -e DB_PASSWORD="FleetPulseDB123!" \
+    78	      -e DB_NAME="fleetpulse" \
+    79	      670518341147.dkr.ecr.ap-south-1.amazonaws.com/fleetpulse-backend:1.1
+    80	
+    81	    # Frontend
+    82	    docker run -d \
+    83	      --name fleetpulse-frontend \
+    84	      --restart unless-stopped \
+    85	      -p 80:80 \
+    86	      670518341147.dkr.ecr.ap-south-1.amazonaws.com/fleetpulse-frontend:1.0
+==== CLOUD INIT ERRORS ====
+335:2026-10-01 09:02:24,844 - __init__.py[DEBUG]: {'MIME-Version': '1.0', 'Content-Type': 'text/x-shellscript', 'Content-Disposition': 'attachment; filename="part-001"'}
+336:2026-10-01 09:02:24,844 - __init__.py[DEBUG]: Calling handler ShellScriptPartHandler: [['text/x-shellscript']] (text/x-shellscript, part-001, 2) with frequency once-per-instance
+337:2026-10-01 09:02:24,844 - util.py[DEBUG]: Writing to /var/lib/cloud/instance/scripts/part-001 - wb: [700] 2190 bytes
+338:2026-10-01 09:02:24,844 - util.py[DEBUG]: Restoring selinux mode for /var/lib/cloud/instances/i-0159364eadd38524a/scripts/part-001 (recursive=False)
+339:2026-10-01 09:02:24,845 - util.py[DEBUG]: Restoring selinux mode for /var/lib/cloud/instances/i-0159364eadd38524a/scripts/part-001 (recursive=False)
+850:2026-10-01 09:02:26,496 - cc_rightscale_userdata.py[DEBUG]: Failed to get raw userdata in module rightscale_userdata
+883:2026-10-01 09:02:26,504 - subp.py[DEBUG]: Running command ['/var/lib/cloud/instance/scripts/part-001'] with allowed return codes [0] (shell=False, capture=False)
+884:2026-10-01 09:02:26,506 - subp.py[DEBUG]: Exec format error. Missing #! in script?
+885:Command: ['/var/lib/cloud/instance/scripts/part-001']
+887:Reason: [Errno 8] Exec format error: b'/var/lib/cloud/instance/scripts/part-001'
+890:2026-10-01 09:02:26,506 - cc_scripts_user.py[WARNING]: Failed to run module scripts-user (scripts in /var/lib/cloud/instance/scripts)
+892:2026-10-01 09:02:26,507 - util.py[WARNING]: Running module scripts-user (<module 'cloudinit.config.cc_scripts_user' from '/usr/lib/python3.9/site-packages/cloudinit/config/cc_scripts_user.py'>) failed
+893:2026-10-01 09:02:26,507 - util.py[DEBUG]: Running module scripts-user (<module 'cloudinit.config.cc_scripts_user' from '/usr/lib/python3.9/site-packages/cloudinit/config/cc_scripts_user.py'>) failed
+894:Traceback (most recent call last):
+904:    raise RuntimeError(
+905:RuntimeError: Runparts: 1 failures (part-001) in 1 attempted commands
+==== DOCKER CHECK ====
+==== CLOUDWATCH RPM CHECK ====
+	Unit docker.service could not be found.
+

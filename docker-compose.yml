@@ -1,0 +1,55 @@
+services:
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: fleetpulse-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: fleetpulse
+      POSTGRES_USER: fleetpulse_user
+      POSTGRES_PASSWORD: fleetpulse_pass
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - fleetpulse_postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+
+    container_name: fleetpulse-backend
+    restart: unless-stopped
+
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: fleetpulse_user
+      DB_PASSWORD: fleetpulse_pass
+      DB_NAME: fleetpulse
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - postgres
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+
+    container_name: fleetpulse-frontend
+    restart: unless-stopped
+
+    ports:
+      - "5173:80"
+
+    depends_on:
+      - backend
+
+volumes:
+  fleetpulse_postgres_data:
